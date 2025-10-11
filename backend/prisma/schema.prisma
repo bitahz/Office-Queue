@@ -47,7 +47,7 @@ model COUNTER_SERVICE {
 model TICKET {
   TicketID  Int      @id @default(autoincrement())
   StartTime DateTime
-  EndTime   DateTime
+  EndTime   DateTime?
   Date      DateTime
   ServiceID Int
   service   SERVICE  @relation(fields: [ServiceID], references: [ServiceID])
