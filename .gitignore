@@ -95,6 +95,20 @@ dist
 .temp
 .cache
 
+.DS_Store
+node_modules
+.turbo
+*.log
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+
+pnpm-lock.yaml
+
 # Sveltekit cache directory
 .svelte-kit/
 
@@ -137,3 +151,4 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.vscode
