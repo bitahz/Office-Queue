@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model COUNTER {
+  CounterID     Int               @id @default(autoincrement())
+  CounterNumber Int               @unique
+
+  // relazione inversa verso COUNTER_SERVICE
+  counterServices COUNTER_SERVICE[]
+}
+
+model SERVICE {
+  ServiceID      Int               @id @default(autoincrement())
+  Name           String
+  AvgServiceTime Int
+
+  // relazione inversa verso COUNTER_SERVICE
+  counterServices COUNTER_SERVICE[]
+
+  // relazione inversa verso TICKET
+  tickets        TICKET[]
+}
+
+model COUNTER_SERVICE {
+  CounterID Int
+  ServiceID Int
+
+  counter COUNTER @relation(fields: [CounterID], references: [CounterID])
+  service SERVICE @relation(fields: [ServiceID], references: [ServiceID])
+
+  @@id([CounterID, ServiceID])
+}
+
+model TICKET {
+  TicketID  Int      @id @default(autoincrement())
+  StartTime DateTime
+  EndTime   DateTime
+  Date      DateTime
+  ServiceID Int
+  service   SERVICE  @relation(fields: [ServiceID], references: [ServiceID])
+}
