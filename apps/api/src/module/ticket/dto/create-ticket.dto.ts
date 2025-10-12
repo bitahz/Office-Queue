@@ -1,8 +1,11 @@
 export class CreateTicketDto {
   id: string;
+  serviceId: number;
 
-  constructor(prefix: string) {
+
+  constructor(prefix: string, serviceId: number) {
     this.id = CreateTicketDto.generateRandomId(prefix);
+    this.serviceId = serviceId;
   }
 
   private static generateRandomId(prefix: string): string {

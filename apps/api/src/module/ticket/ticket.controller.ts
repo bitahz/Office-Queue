@@ -8,9 +8,9 @@ export class TicketController {
   constructor(private readonly ticketService: TicketService) {}
 
   @Post()
-  async create(@Body() serviceName: string, serviceId: string) {
-    let createdTicketId = await this.ticketService.create(serviceId, new CreateTicketDto(serviceName.charAt(0).toUpperCase()));
-    await this.ticketService.insert(createdTicketId);
+  async create(@Body() createTicketDto: CreateTicketDto) {
+    let createdTicketId = await this.ticketService.create(createTicketDto.serviceId, createTicketDto);
+    await this.ticketService.insert(createTicketDto);
     return createdTicketId;
   }
 }

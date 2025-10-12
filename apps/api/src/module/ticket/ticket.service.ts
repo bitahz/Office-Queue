@@ -29,10 +29,13 @@ export class TicketService {
     return `This action returns a #${id} ticket`;
   }
 
-  async insert(id: string) {
+  async insert(createTicketDto: CreateTicketDto) {
     await this.prisma.tICKET.create({
       data: {
-        TicketID: id,
+        TicketID: createTicketDto.id,
+        StartTime: new Date(),
+        Date: new Date(),
+        ServiceID: createTicketDto.serviceId,
       },
     });
   }
