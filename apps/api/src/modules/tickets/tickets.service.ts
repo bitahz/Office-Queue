@@ -9,9 +9,9 @@ export class TicketsService {
   async create(createTicketDto: CreateTicketDto) {
     const serviceId = createTicketDto.serviceId;
 
-    const service = await this.prisma.sERVICE.findFirst({
+    const service = await this.prisma.service.findFirst({
       where: {
-        ServiceID: serviceId,
+        id: serviceId,
       },
     });
 
@@ -19,11 +19,10 @@ export class TicketsService {
       throw new NotFoundException(`Service with ID ${serviceId} not found`);
     }
 
-    const ticket = await this.prisma.tICKET.create({
+    const ticket = await this.prisma.ticket.create({
       data: {
-        StartTime: new Date(),
-        Date: new Date(),
-        ServiceID: serviceId,
+        startTime: new Date(),
+        serviceId: serviceId,
       },
     });
 

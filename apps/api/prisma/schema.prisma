@@ -11,40 +11,40 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:../db.sqlite"
 }
 
-model COUNTER {
-  CounterID     Int               @id @default(autoincrement())
-  CounterNumber Int               @unique
+model Counter {
+  id                Int               @id @default(autoincrement())
+  number            Int               @unique
 
   // relazione inversa verso COUNTER_SERVICE
-  counterServices COUNTER_SERVICE[]
+  counterServices CounterService[]
 
   // relazione inversa verso TICKET
-  tickets        TICKET[]
+  tickets        Ticket[]
 }
 
-model SERVICE {
-  ServiceID      Int               @id @default(autoincrement())
-  Name           String
-  AvgServiceTime Int
+model Service {
+  id                Int               @id @default(autoincrement())
+  name              String
+  avgServiceTime    Int
 
   // relazione inversa verso COUNTER_SERVICE
-  counterServices COUNTER_SERVICE[]
+  counterServices CounterService[]
 
   // relazione inversa verso TICKET
-  tickets        TICKET[]
+  tickets        Ticket[]
 }
 
-model COUNTER_SERVICE {
-  CounterID Int
-  ServiceID Int
+model CounterService {
+  counterId Int
+  serviceId Int
 
-  counter COUNTER @relation(fields: [CounterID], references: [CounterID])
-  service SERVICE @relation(fields: [ServiceID], references: [ServiceID])
+  counter Counter @relation(fields: [counterId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
 
-  @@id([CounterID, ServiceID])
+  @@id([counterId, serviceId])
 }
 
 enum TicketStatus {
@@ -53,14 +53,13 @@ enum TicketStatus {
   SERVED
 }
 
-model TICKET {
-  TicketID     Int      @id @default(autoincrement())  
-  StartTime    DateTime
-  EndTime      DateTime?
-  Date         DateTime
-  ServiceID    Int
-  service      SERVICE  @relation(fields: [ServiceID], references: [ServiceID])
-  CounterID    Int?
-  counter      COUNTER? @relation(fields: [CounterID], references: [CounterID])
-  status       TicketStatus @default(WAITING)
+model Ticket {
+  id            Int      @id @default(autoincrement())  
+  startTime     DateTime
+  endTime       DateTime?  
+  serviceId     Int
+  service       Service  @relation(fields: [serviceId], references: [id])
+  counterId     Int?
+  counter       Counter? @relation(fields: [counterId], references: [id])
+  status        TicketStatus @default(WAITING)
 }
