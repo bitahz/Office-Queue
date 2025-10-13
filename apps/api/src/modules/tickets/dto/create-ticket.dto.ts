@@ -2,14 +2,14 @@ export class CreateTicketDto {
   id: string;
   serviceId: number;
 
-
   constructor(prefix: string, serviceId: number) {
     this.id = CreateTicketDto.generateRandomId(prefix);
     this.serviceId = serviceId;
   }
 
   private static generateRandomId(prefix: string): string {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     for (let i = 0; i < 5; i++) {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
