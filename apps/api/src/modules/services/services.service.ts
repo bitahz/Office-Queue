@@ -8,17 +8,17 @@ export class ServicesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createServiceDto: CreateServiceDto) {
-    return await this.prisma.sERVICE.create({
+    return await this.prisma.service.create({
       data: {
-        Name: createServiceDto.name,
-        AvgServiceTime: createServiceDto.avgServiceTime,
+        name: createServiceDto.name,
+        avgServiceTime: createServiceDto.avgServiceTime,
       },
     });
   }
 
   async findAll() {
-    return await this.prisma.sERVICE.findMany({
-      orderBy: { Name: 'asc' },
+    return await this.prisma.service.findMany({
+      orderBy: { name: 'asc' },
       include: {
         counterServices: {
           include: {
@@ -33,8 +33,8 @@ export class ServicesService {
   }
 
   async findOne(id: number) {
-    const service = await this.prisma.sERVICE.findUnique({
-      where: { ServiceID: id },
+    const service = await this.prisma.service.findUnique({
+      where: { id: id },
       include: {
         counterServices: {
           include: {
@@ -53,8 +53,8 @@ export class ServicesService {
   }
 
   async findByName(name: string) {
-    const service = await this.prisma.sERVICE.findFirst({
-      where: { Name: name },
+    const service = await this.prisma.service.findFirst({
+      where: { name: name },
       include: {
         counterServices: {
           include: {
@@ -73,11 +73,11 @@ export class ServicesService {
 
   async update(id: number, updateServiceDto: UpdateServiceDto) {
     try {
-      return await this.prisma.sERVICE.update({
-        where: { ServiceID: id },
+      return await this.prisma.service.update({
+        where: { id: id },
         data: {
-          Name: updateServiceDto.name,
-          AvgServiceTime: updateServiceDto.avgServiceTime,
+          name: updateServiceDto.name,
+          avgServiceTime: updateServiceDto.avgServiceTime,
         },
       });
     } catch (error) {
@@ -87,8 +87,8 @@ export class ServicesService {
 
   async remove(id: number) {
     try {
-      return await this.prisma.sERVICE.delete({
-        where: { ServiceID: id },
+      return await this.prisma.service.delete({
+        where: { id: id },
       });
     } catch (error) {
       throw new NotFoundException(`Service with ID ${id} not found`);
@@ -97,11 +97,11 @@ export class ServicesService {
 
   // Metodi specifici per il business logic
   async getServicesForCounter(counterId: number) {
-    return await this.prisma.sERVICE.findMany({
+    return await this.prisma.service.findMany({
       where: {
         counterServices: {
           some: {
-            CounterID: counterId,
+            counterId: counterId,
           },
         },
       },
@@ -112,13 +112,14 @@ export class ServicesService {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    return await this.prisma.tICKET.count({
+    return await this.prisma.ticket.count({
       where: {
-        ServiceID: serviceId,
-        Date: {
+        serviceId: serviceId,
+        startTime: {
           gte: today,
         },
-        EndTime: null, // solo ticket non ancora serviti
+        endTime: null, // solo ticket non ancora serviti
+        status: 'WAITING',
       },
     });
   }

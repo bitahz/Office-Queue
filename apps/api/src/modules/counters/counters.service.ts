@@ -8,68 +8,66 @@ export class CountersService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createCounterDto: CreateCounterDto) {
-    console.log(createCounterDto);
-
-    return this.prisma.cOUNTER.create({
+    return this.prisma.counter.create({
       data: {
-        CounterNumber: createCounterDto.CounterNumber,
+        number: createCounterDto.number,
       },
     });
   }
 
   findAll() {
-    return this.prisma.cOUNTER.findMany({
-      orderBy: { CounterNumber: 'asc' },
+    return this.prisma.counter.findMany({
+      orderBy: { number: 'asc' },
     });
   }
 
   findOne(id: number) {
-    return this.prisma.cOUNTER.findUnique({
-      where: { CounterID: id },
+    return this.prisma.counter.findUnique({
+      where: { id: id },
     });
   }
 
   update(id: number, updateCounterDto: UpdateCounterDto) {
-    return this.prisma.cOUNTER.update({
-      where: { CounterID: id },
+    return this.prisma.counter.update({
+      where: { id: id },
       data: {
-        CounterNumber: updateCounterDto.CounterNumber,
+        number: updateCounterDto.number,
       },
     });
   }
 
   remove(id: number) {
-    return this.prisma.cOUNTER.delete({
-      where: { CounterID: id },
+    return this.prisma.counter.delete({
+      where: { id: id },
     });
   }
 
   async nextTicket(id: number) {
-    const counterServices = await this.prisma.cOUNTER_SERVICE.findMany({
-      where: { CounterID: id },
-      select: { ServiceID: true },
+    const counterServices = await this.prisma.counterService.findMany({
+      where: { counterId: id },
+      select: { serviceId: true },
     });
 
     const counterServicesIds = counterServices.map(
-      (counterService) => counterService.ServiceID,
+      (counterService) => counterService.serviceId,
     );
 
-    const nextTicket = await this.prisma.tICKET.findFirst({
+    const nextTicket = await this.prisma.ticket.findFirst({
       where: {
-        ServiceID: { in: counterServicesIds },
+        serviceId: { in: counterServicesIds },
         status: 'WAITING',
       },
-      orderBy: { StartTime: 'asc' },
+      orderBy: { startTime: 'asc' },
     });
 
     return nextTicket;
   }
 
   assignService(counterId: number, serviceId: number) {
-    return this.prisma.cOUNTER_SERVICE.create({
+    return this.prisma.counterService.create({
       data: {
-        CounterID: counterId,
-        ServiceID: serviceId,
+        counterId: counterId,
+        serviceId: serviceId,
       },
     });
   }
