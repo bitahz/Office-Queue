@@ -107,6 +107,9 @@ dist-ssr
 server/dist
 public/dist
 
+# EXCEPT track this specific one:
+!apps/api/prisma/.env
+
 pnpm-lock.yaml
 
 # Sveltekit cache directory
