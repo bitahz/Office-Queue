@@ -107,10 +107,12 @@ exports.Prisma.COUNTER_SERVICEScalarFieldEnum = {
 
 exports.Prisma.TICKETScalarFieldEnum = {
   TicketID: 'TicketID',
+  TicketNumber: 'TicketNumber',
   StartTime: 'StartTime',
   EndTime: 'EndTime',
   Date: 'Date',
-  ServiceID: 'ServiceID'
+  ServiceID: 'ServiceID',
+  CounterID: 'CounterID'
 };
 
 exports.Prisma.SortOrder = {
@@ -141,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Università\\PoliTO\\Software Engineering 2\\Progetto\\Office-Queue\\apps\\api\\generated\\prisma",
+      "value": "C:\\Users\\ELEONORA\\Desktop\\se2\\Office-Queue\\apps\\api\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -155,11 +157,12 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Università\\PoliTO\\Software Engineering 2\\Progetto\\Office-Queue\\apps\\api\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\ELEONORA\\Desktop\\se2\\Office-Queue\\apps\\api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": "../../.env",
+    "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.17.1",
@@ -168,7 +171,6 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -177,13 +179,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel COUNTER {\n  CounterID     Int @id @default(autoincrement())\n  CounterNumber Int @unique\n\n  // relazione inversa verso COUNTER_SERVICE\n  counterServices COUNTER_SERVICE[]\n}\n\nmodel SERVICE {\n  ServiceID      Int    @id @default(autoincrement())\n  Name           String\n  AvgServiceTime Int\n\n  // relazione inversa verso COUNTER_SERVICE\n  counterServices COUNTER_SERVICE[]\n\n  // relazione inversa verso TICKET\n  tickets TICKET[]\n}\n\nmodel COUNTER_SERVICE {\n  CounterID Int\n  ServiceID Int\n\n  counter COUNTER @relation(fields: [CounterID], references: [CounterID])\n  service SERVICE @relation(fields: [ServiceID], references: [ServiceID])\n\n  @@id([CounterID, ServiceID])\n}\n\nmodel TICKET {\n  TicketID  Int       @id @default(autoincrement())\n  StartTime DateTime\n  EndTime   DateTime?\n  Date      DateTime\n  ServiceID Int\n  service   SERVICE   @relation(fields: [ServiceID], references: [ServiceID])\n}\n",
-  "inlineSchemaHash": "0c58fd0c38220540e47399a5a5dcc303ef3335e7778ac41dcb6425c368b41c77",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel COUNTER {\n  CounterID     Int @id @default(autoincrement())\n  CounterNumber Int @unique\n\n  // relazione inversa verso COUNTER_SERVICE\n  counterServices COUNTER_SERVICE[]\n\n  // relazione inversa verso TICKET\n  tickets TICKET[]\n}\n\nmodel SERVICE {\n  ServiceID      Int    @id @default(autoincrement())\n  Name           String\n  AvgServiceTime Int\n\n  // relazione inversa verso COUNTER_SERVICE\n  counterServices COUNTER_SERVICE[]\n\n  // relazione inversa verso TICKET\n  tickets TICKET[]\n}\n\nmodel COUNTER_SERVICE {\n  CounterID Int\n  ServiceID Int\n\n  counter COUNTER @relation(fields: [CounterID], references: [CounterID])\n  service SERVICE @relation(fields: [ServiceID], references: [ServiceID])\n\n  @@id([CounterID, ServiceID])\n}\n\nmodel TICKET {\n  TicketID     Int       @id @default(autoincrement())\n  TicketNumber String    @unique\n  StartTime    DateTime\n  EndTime      DateTime?\n  Date         DateTime\n  ServiceID    Int\n  service      SERVICE   @relation(fields: [ServiceID], references: [ServiceID])\n  CounterID    Int?\n  counter      COUNTER?  @relation(fields: [CounterID], references: [CounterID])\n}\n",
+  "inlineSchemaHash": "b9e49d2174161dcfca45214ae0fa0e559ab5227b04c605449bc0af2c9603119c",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"COUNTER\":{\"fields\":[{\"name\":\"CounterID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CounterNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counterServices\",\"kind\":\"object\",\"type\":\"COUNTER_SERVICE\",\"relationName\":\"COUNTERToCOUNTER_SERVICE\"}],\"dbName\":null},\"SERVICE\":{\"fields\":[{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"Name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"AvgServiceTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counterServices\",\"kind\":\"object\",\"type\":\"COUNTER_SERVICE\",\"relationName\":\"COUNTER_SERVICEToSERVICE\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"TICKET\",\"relationName\":\"SERVICEToTICKET\"}],\"dbName\":null},\"COUNTER_SERVICE\":{\"fields\":[{\"name\":\"CounterID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counter\",\"kind\":\"object\",\"type\":\"COUNTER\",\"relationName\":\"COUNTERToCOUNTER_SERVICE\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"SERVICE\",\"relationName\":\"COUNTER_SERVICEToSERVICE\"}],\"dbName\":null},\"TICKET\":{\"fields\":[{\"name\":\"TicketID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"StartTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"EndTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"SERVICE\",\"relationName\":\"SERVICEToTICKET\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"COUNTER\":{\"fields\":[{\"name\":\"CounterID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"CounterNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counterServices\",\"kind\":\"object\",\"type\":\"COUNTER_SERVICE\",\"relationName\":\"COUNTERToCOUNTER_SERVICE\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"TICKET\",\"relationName\":\"COUNTERToTICKET\"}],\"dbName\":null},\"SERVICE\":{\"fields\":[{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"Name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"AvgServiceTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counterServices\",\"kind\":\"object\",\"type\":\"COUNTER_SERVICE\",\"relationName\":\"COUNTER_SERVICEToSERVICE\"},{\"name\":\"tickets\",\"kind\":\"object\",\"type\":\"TICKET\",\"relationName\":\"SERVICEToTICKET\"}],\"dbName\":null},\"COUNTER_SERVICE\":{\"fields\":[{\"name\":\"CounterID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counter\",\"kind\":\"object\",\"type\":\"COUNTER\",\"relationName\":\"COUNTERToCOUNTER_SERVICE\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"SERVICE\",\"relationName\":\"COUNTER_SERVICEToSERVICE\"}],\"dbName\":null},\"TICKET\":{\"fields\":[{\"name\":\"TicketID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"TicketNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"StartTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"EndTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"Date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ServiceID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"SERVICE\",\"relationName\":\"SERVICEToTICKET\"},{\"name\":\"CounterID\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"counter\",\"kind\":\"object\",\"type\":\"COUNTER\",\"relationName\":\"COUNTERToTICKET\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

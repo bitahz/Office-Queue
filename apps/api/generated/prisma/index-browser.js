@@ -135,10 +135,12 @@ exports.Prisma.COUNTER_SERVICEScalarFieldEnum = {
 
 exports.Prisma.TICKETScalarFieldEnum = {
   TicketID: 'TicketID',
+  TicketNumber: 'TicketNumber',
   StartTime: 'StartTime',
   EndTime: 'EndTime',
   Date: 'Date',
-  ServiceID: 'ServiceID'
+  ServiceID: 'ServiceID',
+  CounterID: 'CounterID'
 };
 
 exports.Prisma.SortOrder = {

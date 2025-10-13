@@ -1134,10 +1134,12 @@ export namespace Prisma {
 
   export type COUNTERCountOutputType = {
     counterServices: number
+    tickets: number
   }
 
   export type COUNTERCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     counterServices?: boolean | COUNTERCountOutputTypeCountCounterServicesArgs
+    tickets?: boolean | COUNTERCountOutputTypeCountTicketsArgs
   }
 
   // Custom InputTypes
@@ -1156,6 +1158,13 @@ export namespace Prisma {
    */
   export type COUNTERCountOutputTypeCountCounterServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: COUNTER_SERVICEWhereInput
+  }
+
+  /**
+   * COUNTERCountOutputType without action
+   */
+  export type COUNTERCountOutputTypeCountTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TICKETWhereInput
   }
 
 
@@ -1382,6 +1391,7 @@ export namespace Prisma {
     CounterID?: boolean
     CounterNumber?: boolean
     counterServices?: boolean | COUNTER$counterServicesArgs<ExtArgs>
+    tickets?: boolean | COUNTER$ticketsArgs<ExtArgs>
     _count?: boolean | COUNTERCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cOUNTER"]>
 
@@ -1403,6 +1413,7 @@ export namespace Prisma {
   export type COUNTEROmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"CounterID" | "CounterNumber", ExtArgs["result"]["cOUNTER"]>
   export type COUNTERInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     counterServices?: boolean | COUNTER$counterServicesArgs<ExtArgs>
+    tickets?: boolean | COUNTER$ticketsArgs<ExtArgs>
     _count?: boolean | COUNTERCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type COUNTERIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1412,6 +1423,7 @@ export namespace Prisma {
     name: "COUNTER"
     objects: {
       counterServices: Prisma.$COUNTER_SERVICEPayload<ExtArgs>[]
+      tickets: Prisma.$TICKETPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       CounterID: number
@@ -1811,6 +1823,7 @@ export namespace Prisma {
   export interface Prisma__COUNTERClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     counterServices<T extends COUNTER$counterServicesArgs<ExtArgs> = {}>(args?: Subset<T, COUNTER$counterServicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$COUNTER_SERVICEPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tickets<T extends COUNTER$ticketsArgs<ExtArgs> = {}>(args?: Subset<T, COUNTER$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TICKETPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2249,6 +2262,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: COUNTER_SERVICEScalarFieldEnum | COUNTER_SERVICEScalarFieldEnum[]
+  }
+
+  /**
+   * COUNTER.tickets
+   */
+  export type COUNTER$ticketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TICKET
+     */
+    select?: TICKETSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TICKET
+     */
+    omit?: TICKETOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TICKETInclude<ExtArgs> | null
+    where?: TICKETWhereInput
+    orderBy?: TICKETOrderByWithRelationInput | TICKETOrderByWithRelationInput[]
+    cursor?: TICKETWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TICKETScalarFieldEnum | TICKETScalarFieldEnum[]
   }
 
   /**
@@ -4456,35 +4493,43 @@ export namespace Prisma {
   export type TICKETAvgAggregateOutputType = {
     TicketID: number | null
     ServiceID: number | null
+    CounterID: number | null
   }
 
   export type TICKETSumAggregateOutputType = {
     TicketID: number | null
     ServiceID: number | null
+    CounterID: number | null
   }
 
   export type TICKETMinAggregateOutputType = {
     TicketID: number | null
+    TicketNumber: string | null
     StartTime: Date | null
     EndTime: Date | null
     Date: Date | null
     ServiceID: number | null
+    CounterID: number | null
   }
 
   export type TICKETMaxAggregateOutputType = {
     TicketID: number | null
+    TicketNumber: string | null
     StartTime: Date | null
     EndTime: Date | null
     Date: Date | null
     ServiceID: number | null
+    CounterID: number | null
   }
 
   export type TICKETCountAggregateOutputType = {
     TicketID: number
+    TicketNumber: number
     StartTime: number
     EndTime: number
     Date: number
     ServiceID: number
+    CounterID: number
     _all: number
   }
 
@@ -4492,35 +4537,43 @@ export namespace Prisma {
   export type TICKETAvgAggregateInputType = {
     TicketID?: true
     ServiceID?: true
+    CounterID?: true
   }
 
   export type TICKETSumAggregateInputType = {
     TicketID?: true
     ServiceID?: true
+    CounterID?: true
   }
 
   export type TICKETMinAggregateInputType = {
     TicketID?: true
+    TicketNumber?: true
     StartTime?: true
     EndTime?: true
     Date?: true
     ServiceID?: true
+    CounterID?: true
   }
 
   export type TICKETMaxAggregateInputType = {
     TicketID?: true
+    TicketNumber?: true
     StartTime?: true
     EndTime?: true
     Date?: true
     ServiceID?: true
+    CounterID?: true
   }
 
   export type TICKETCountAggregateInputType = {
     TicketID?: true
+    TicketNumber?: true
     StartTime?: true
     EndTime?: true
     Date?: true
     ServiceID?: true
+    CounterID?: true
     _all?: true
   }
 
@@ -4612,10 +4665,12 @@ export namespace Prisma {
 
   export type TICKETGroupByOutputType = {
     TicketID: number
+    TicketNumber: string
     StartTime: Date
     EndTime: Date | null
     Date: Date
     ServiceID: number
+    CounterID: number | null
     _count: TICKETCountAggregateOutputType | null
     _avg: TICKETAvgAggregateOutputType | null
     _sum: TICKETSumAggregateOutputType | null
@@ -4639,61 +4694,78 @@ export namespace Prisma {
 
   export type TICKETSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     TicketID?: boolean
+    TicketNumber?: boolean
     StartTime?: boolean
     EndTime?: boolean
     Date?: boolean
     ServiceID?: boolean
+    CounterID?: boolean
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }, ExtArgs["result"]["tICKET"]>
 
   export type TICKETSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     TicketID?: boolean
+    TicketNumber?: boolean
     StartTime?: boolean
     EndTime?: boolean
     Date?: boolean
     ServiceID?: boolean
+    CounterID?: boolean
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }, ExtArgs["result"]["tICKET"]>
 
   export type TICKETSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     TicketID?: boolean
+    TicketNumber?: boolean
     StartTime?: boolean
     EndTime?: boolean
     Date?: boolean
     ServiceID?: boolean
+    CounterID?: boolean
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }, ExtArgs["result"]["tICKET"]>
 
   export type TICKETSelectScalar = {
     TicketID?: boolean
+    TicketNumber?: boolean
     StartTime?: boolean
     EndTime?: boolean
     Date?: boolean
     ServiceID?: boolean
+    CounterID?: boolean
   }
 
-  export type TICKETOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"TicketID" | "StartTime" | "EndTime" | "Date" | "ServiceID", ExtArgs["result"]["tICKET"]>
+  export type TICKETOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"TicketID" | "TicketNumber" | "StartTime" | "EndTime" | "Date" | "ServiceID" | "CounterID", ExtArgs["result"]["tICKET"]>
   export type TICKETInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }
   export type TICKETIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }
   export type TICKETIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     service?: boolean | SERVICEDefaultArgs<ExtArgs>
+    counter?: boolean | TICKET$counterArgs<ExtArgs>
   }
 
   export type $TICKETPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TICKET"
     objects: {
       service: Prisma.$SERVICEPayload<ExtArgs>
+      counter: Prisma.$COUNTERPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       TicketID: number
+      TicketNumber: string
       StartTime: Date
       EndTime: Date | null
       Date: Date
       ServiceID: number
+      CounterID: number | null
     }, ExtArgs["result"]["tICKET"]>
     composites: {}
   }
@@ -5089,6 +5161,7 @@ export namespace Prisma {
   export interface Prisma__TICKETClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     service<T extends SERVICEDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SERVICEDefaultArgs<ExtArgs>>): Prisma__SERVICEClient<$Result.GetResult<Prisma.$SERVICEPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    counter<T extends TICKET$counterArgs<ExtArgs> = {}>(args?: Subset<T, TICKET$counterArgs<ExtArgs>>): Prisma__COUNTERClient<$Result.GetResult<Prisma.$COUNTERPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5119,10 +5192,12 @@ export namespace Prisma {
    */
   interface TICKETFieldRefs {
     readonly TicketID: FieldRef<"TICKET", 'Int'>
+    readonly TicketNumber: FieldRef<"TICKET", 'String'>
     readonly StartTime: FieldRef<"TICKET", 'DateTime'>
     readonly EndTime: FieldRef<"TICKET", 'DateTime'>
     readonly Date: FieldRef<"TICKET", 'DateTime'>
     readonly ServiceID: FieldRef<"TICKET", 'Int'>
+    readonly CounterID: FieldRef<"TICKET", 'Int'>
   }
     
 
@@ -5517,6 +5592,25 @@ export namespace Prisma {
   }
 
   /**
+   * TICKET.counter
+   */
+  export type TICKET$counterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the COUNTER
+     */
+    select?: COUNTERSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the COUNTER
+     */
+    omit?: COUNTEROmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: COUNTERInclude<ExtArgs> | null
+    where?: COUNTERWhereInput
+  }
+
+  /**
    * TICKET without action
    */
   export type TICKETDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5573,10 +5667,12 @@ export namespace Prisma {
 
   export const TICKETScalarFieldEnum: {
     TicketID: 'TicketID',
+    TicketNumber: 'TicketNumber',
     StartTime: 'StartTime',
     EndTime: 'EndTime',
     Date: 'Date',
-    ServiceID: 'ServiceID'
+    ServiceID: 'ServiceID',
+    CounterID: 'CounterID'
   };
 
   export type TICKETScalarFieldEnum = (typeof TICKETScalarFieldEnum)[keyof typeof TICKETScalarFieldEnum]
@@ -5641,12 +5737,14 @@ export namespace Prisma {
     CounterID?: IntFilter<"COUNTER"> | number
     CounterNumber?: IntFilter<"COUNTER"> | number
     counterServices?: COUNTER_SERVICEListRelationFilter
+    tickets?: TICKETListRelationFilter
   }
 
   export type COUNTEROrderByWithRelationInput = {
     CounterID?: SortOrder
     CounterNumber?: SortOrder
     counterServices?: COUNTER_SERVICEOrderByRelationAggregateInput
+    tickets?: TICKETOrderByRelationAggregateInput
   }
 
   export type COUNTERWhereUniqueInput = Prisma.AtLeast<{
@@ -5656,6 +5754,7 @@ export namespace Prisma {
     OR?: COUNTERWhereInput[]
     NOT?: COUNTERWhereInput | COUNTERWhereInput[]
     counterServices?: COUNTER_SERVICEListRelationFilter
+    tickets?: TICKETListRelationFilter
   }, "CounterID" | "CounterNumber">
 
   export type COUNTEROrderByWithAggregationInput = {
@@ -5777,24 +5876,31 @@ export namespace Prisma {
     OR?: TICKETWhereInput[]
     NOT?: TICKETWhereInput | TICKETWhereInput[]
     TicketID?: IntFilter<"TICKET"> | number
+    TicketNumber?: StringFilter<"TICKET"> | string
     StartTime?: DateTimeFilter<"TICKET"> | Date | string
     EndTime?: DateTimeNullableFilter<"TICKET"> | Date | string | null
     Date?: DateTimeFilter<"TICKET"> | Date | string
     ServiceID?: IntFilter<"TICKET"> | number
+    CounterID?: IntNullableFilter<"TICKET"> | number | null
     service?: XOR<SERVICEScalarRelationFilter, SERVICEWhereInput>
+    counter?: XOR<COUNTERNullableScalarRelationFilter, COUNTERWhereInput> | null
   }
 
   export type TICKETOrderByWithRelationInput = {
     TicketID?: SortOrder
+    TicketNumber?: SortOrder
     StartTime?: SortOrder
     EndTime?: SortOrderInput | SortOrder
     Date?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrderInput | SortOrder
     service?: SERVICEOrderByWithRelationInput
+    counter?: COUNTEROrderByWithRelationInput
   }
 
   export type TICKETWhereUniqueInput = Prisma.AtLeast<{
     TicketID?: number
+    TicketNumber?: string
     AND?: TICKETWhereInput | TICKETWhereInput[]
     OR?: TICKETWhereInput[]
     NOT?: TICKETWhereInput | TICKETWhereInput[]
@@ -5802,15 +5908,19 @@ export namespace Prisma {
     EndTime?: DateTimeNullableFilter<"TICKET"> | Date | string | null
     Date?: DateTimeFilter<"TICKET"> | Date | string
     ServiceID?: IntFilter<"TICKET"> | number
+    CounterID?: IntNullableFilter<"TICKET"> | number | null
     service?: XOR<SERVICEScalarRelationFilter, SERVICEWhereInput>
-  }, "TicketID">
+    counter?: XOR<COUNTERNullableScalarRelationFilter, COUNTERWhereInput> | null
+  }, "TicketID" | "TicketNumber">
 
   export type TICKETOrderByWithAggregationInput = {
     TicketID?: SortOrder
+    TicketNumber?: SortOrder
     StartTime?: SortOrder
     EndTime?: SortOrderInput | SortOrder
     Date?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrderInput | SortOrder
     _count?: TICKETCountOrderByAggregateInput
     _avg?: TICKETAvgOrderByAggregateInput
     _max?: TICKETMaxOrderByAggregateInput
@@ -5823,32 +5933,38 @@ export namespace Prisma {
     OR?: TICKETScalarWhereWithAggregatesInput[]
     NOT?: TICKETScalarWhereWithAggregatesInput | TICKETScalarWhereWithAggregatesInput[]
     TicketID?: IntWithAggregatesFilter<"TICKET"> | number
+    TicketNumber?: StringWithAggregatesFilter<"TICKET"> | string
     StartTime?: DateTimeWithAggregatesFilter<"TICKET"> | Date | string
     EndTime?: DateTimeNullableWithAggregatesFilter<"TICKET"> | Date | string | null
     Date?: DateTimeWithAggregatesFilter<"TICKET"> | Date | string
     ServiceID?: IntWithAggregatesFilter<"TICKET"> | number
+    CounterID?: IntNullableWithAggregatesFilter<"TICKET"> | number | null
   }
 
   export type COUNTERCreateInput = {
     CounterNumber: number
     counterServices?: COUNTER_SERVICECreateNestedManyWithoutCounterInput
+    tickets?: TICKETCreateNestedManyWithoutCounterInput
   }
 
   export type COUNTERUncheckedCreateInput = {
     CounterID?: number
     CounterNumber: number
     counterServices?: COUNTER_SERVICEUncheckedCreateNestedManyWithoutCounterInput
+    tickets?: TICKETUncheckedCreateNestedManyWithoutCounterInput
   }
 
   export type COUNTERUpdateInput = {
     CounterNumber?: IntFieldUpdateOperationsInput | number
     counterServices?: COUNTER_SERVICEUpdateManyWithoutCounterNestedInput
+    tickets?: TICKETUpdateManyWithoutCounterNestedInput
   }
 
   export type COUNTERUncheckedUpdateInput = {
     CounterID?: IntFieldUpdateOperationsInput | number
     CounterNumber?: IntFieldUpdateOperationsInput | number
     counterServices?: COUNTER_SERVICEUncheckedUpdateManyWithoutCounterNestedInput
+    tickets?: TICKETUncheckedUpdateManyWithoutCounterNestedInput
   }
 
   export type COUNTERCreateManyInput = {
@@ -5947,44 +6063,55 @@ export namespace Prisma {
   }
 
   export type TICKETCreateInput = {
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
     service: SERVICECreateNestedOneWithoutTicketsInput
+    counter?: COUNTERCreateNestedOneWithoutTicketsInput
   }
 
   export type TICKETUncheckedCreateInput = {
     TicketID?: number
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
     ServiceID: number
+    CounterID?: number | null
   }
 
   export type TICKETUpdateInput = {
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
     service?: SERVICEUpdateOneRequiredWithoutTicketsNestedInput
+    counter?: COUNTERUpdateOneWithoutTicketsNestedInput
   }
 
   export type TICKETUncheckedUpdateInput = {
     TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
     ServiceID?: IntFieldUpdateOperationsInput | number
+    CounterID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TICKETCreateManyInput = {
     TicketID?: number
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
     ServiceID: number
+    CounterID?: number | null
   }
 
   export type TICKETUpdateManyMutationInput = {
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5992,10 +6119,12 @@ export namespace Prisma {
 
   export type TICKETUncheckedUpdateManyInput = {
     TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
     ServiceID?: IntFieldUpdateOperationsInput | number
+    CounterID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6015,7 +6144,17 @@ export namespace Prisma {
     none?: COUNTER_SERVICEWhereInput
   }
 
+  export type TICKETListRelationFilter = {
+    every?: TICKETWhereInput
+    some?: TICKETWhereInput
+    none?: TICKETWhereInput
+  }
+
   export type COUNTER_SERVICEOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TICKETOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6072,16 +6211,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type TICKETListRelationFilter = {
-    every?: TICKETWhereInput
-    some?: TICKETWhereInput
-    none?: TICKETWhereInput
-  }
-
-  export type TICKETOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type SERVICECountOrderByAggregateInput = {
@@ -6191,6 +6320,22 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type COUNTERNullableScalarRelationFilter = {
+    is?: COUNTERWhereInput | null
+    isNot?: COUNTERWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6198,36 +6343,44 @@ export namespace Prisma {
 
   export type TICKETCountOrderByAggregateInput = {
     TicketID?: SortOrder
+    TicketNumber?: SortOrder
     StartTime?: SortOrder
     EndTime?: SortOrder
     Date?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrder
   }
 
   export type TICKETAvgOrderByAggregateInput = {
     TicketID?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrder
   }
 
   export type TICKETMaxOrderByAggregateInput = {
     TicketID?: SortOrder
+    TicketNumber?: SortOrder
     StartTime?: SortOrder
     EndTime?: SortOrder
     Date?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrder
   }
 
   export type TICKETMinOrderByAggregateInput = {
     TicketID?: SortOrder
+    TicketNumber?: SortOrder
     StartTime?: SortOrder
     EndTime?: SortOrder
     Date?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrder
   }
 
   export type TICKETSumOrderByAggregateInput = {
     TicketID?: SortOrder
     ServiceID?: SortOrder
+    CounterID?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6258,6 +6411,22 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type COUNTER_SERVICECreateNestedManyWithoutCounterInput = {
     create?: XOR<COUNTER_SERVICECreateWithoutCounterInput, COUNTER_SERVICEUncheckedCreateWithoutCounterInput> | COUNTER_SERVICECreateWithoutCounterInput[] | COUNTER_SERVICEUncheckedCreateWithoutCounterInput[]
     connectOrCreate?: COUNTER_SERVICECreateOrConnectWithoutCounterInput | COUNTER_SERVICECreateOrConnectWithoutCounterInput[]
@@ -6265,11 +6434,25 @@ export namespace Prisma {
     connect?: COUNTER_SERVICEWhereUniqueInput | COUNTER_SERVICEWhereUniqueInput[]
   }
 
+  export type TICKETCreateNestedManyWithoutCounterInput = {
+    create?: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput> | TICKETCreateWithoutCounterInput[] | TICKETUncheckedCreateWithoutCounterInput[]
+    connectOrCreate?: TICKETCreateOrConnectWithoutCounterInput | TICKETCreateOrConnectWithoutCounterInput[]
+    createMany?: TICKETCreateManyCounterInputEnvelope
+    connect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+  }
+
   export type COUNTER_SERVICEUncheckedCreateNestedManyWithoutCounterInput = {
     create?: XOR<COUNTER_SERVICECreateWithoutCounterInput, COUNTER_SERVICEUncheckedCreateWithoutCounterInput> | COUNTER_SERVICECreateWithoutCounterInput[] | COUNTER_SERVICEUncheckedCreateWithoutCounterInput[]
     connectOrCreate?: COUNTER_SERVICECreateOrConnectWithoutCounterInput | COUNTER_SERVICECreateOrConnectWithoutCounterInput[]
     createMany?: COUNTER_SERVICECreateManyCounterInputEnvelope
     connect?: COUNTER_SERVICEWhereUniqueInput | COUNTER_SERVICEWhereUniqueInput[]
+  }
+
+  export type TICKETUncheckedCreateNestedManyWithoutCounterInput = {
+    create?: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput> | TICKETCreateWithoutCounterInput[] | TICKETUncheckedCreateWithoutCounterInput[]
+    connectOrCreate?: TICKETCreateOrConnectWithoutCounterInput | TICKETCreateOrConnectWithoutCounterInput[]
+    createMany?: TICKETCreateManyCounterInputEnvelope
+    connect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -6294,6 +6477,20 @@ export namespace Prisma {
     deleteMany?: COUNTER_SERVICEScalarWhereInput | COUNTER_SERVICEScalarWhereInput[]
   }
 
+  export type TICKETUpdateManyWithoutCounterNestedInput = {
+    create?: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput> | TICKETCreateWithoutCounterInput[] | TICKETUncheckedCreateWithoutCounterInput[]
+    connectOrCreate?: TICKETCreateOrConnectWithoutCounterInput | TICKETCreateOrConnectWithoutCounterInput[]
+    upsert?: TICKETUpsertWithWhereUniqueWithoutCounterInput | TICKETUpsertWithWhereUniqueWithoutCounterInput[]
+    createMany?: TICKETCreateManyCounterInputEnvelope
+    set?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    disconnect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    delete?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    connect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    update?: TICKETUpdateWithWhereUniqueWithoutCounterInput | TICKETUpdateWithWhereUniqueWithoutCounterInput[]
+    updateMany?: TICKETUpdateManyWithWhereWithoutCounterInput | TICKETUpdateManyWithWhereWithoutCounterInput[]
+    deleteMany?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
+  }
+
   export type COUNTER_SERVICEUncheckedUpdateManyWithoutCounterNestedInput = {
     create?: XOR<COUNTER_SERVICECreateWithoutCounterInput, COUNTER_SERVICEUncheckedCreateWithoutCounterInput> | COUNTER_SERVICECreateWithoutCounterInput[] | COUNTER_SERVICEUncheckedCreateWithoutCounterInput[]
     connectOrCreate?: COUNTER_SERVICECreateOrConnectWithoutCounterInput | COUNTER_SERVICECreateOrConnectWithoutCounterInput[]
@@ -6306,6 +6503,20 @@ export namespace Prisma {
     update?: COUNTER_SERVICEUpdateWithWhereUniqueWithoutCounterInput | COUNTER_SERVICEUpdateWithWhereUniqueWithoutCounterInput[]
     updateMany?: COUNTER_SERVICEUpdateManyWithWhereWithoutCounterInput | COUNTER_SERVICEUpdateManyWithWhereWithoutCounterInput[]
     deleteMany?: COUNTER_SERVICEScalarWhereInput | COUNTER_SERVICEScalarWhereInput[]
+  }
+
+  export type TICKETUncheckedUpdateManyWithoutCounterNestedInput = {
+    create?: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput> | TICKETCreateWithoutCounterInput[] | TICKETUncheckedCreateWithoutCounterInput[]
+    connectOrCreate?: TICKETCreateOrConnectWithoutCounterInput | TICKETCreateOrConnectWithoutCounterInput[]
+    upsert?: TICKETUpsertWithWhereUniqueWithoutCounterInput | TICKETUpsertWithWhereUniqueWithoutCounterInput[]
+    createMany?: TICKETCreateManyCounterInputEnvelope
+    set?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    disconnect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    delete?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    connect?: TICKETWhereUniqueInput | TICKETWhereUniqueInput[]
+    update?: TICKETUpdateWithWhereUniqueWithoutCounterInput | TICKETUpdateWithWhereUniqueWithoutCounterInput[]
+    updateMany?: TICKETUpdateManyWithWhereWithoutCounterInput | TICKETUpdateManyWithWhereWithoutCounterInput[]
+    deleteMany?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
   }
 
   export type COUNTER_SERVICECreateNestedManyWithoutServiceInput = {
@@ -6430,6 +6641,12 @@ export namespace Prisma {
     connect?: SERVICEWhereUniqueInput
   }
 
+  export type COUNTERCreateNestedOneWithoutTicketsInput = {
+    create?: XOR<COUNTERCreateWithoutTicketsInput, COUNTERUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: COUNTERCreateOrConnectWithoutTicketsInput
+    connect?: COUNTERWhereUniqueInput
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -6444,6 +6661,24 @@ export namespace Prisma {
     upsert?: SERVICEUpsertWithoutTicketsInput
     connect?: SERVICEWhereUniqueInput
     update?: XOR<XOR<SERVICEUpdateToOneWithWhereWithoutTicketsInput, SERVICEUpdateWithoutTicketsInput>, SERVICEUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type COUNTERUpdateOneWithoutTicketsNestedInput = {
+    create?: XOR<COUNTERCreateWithoutTicketsInput, COUNTERUncheckedCreateWithoutTicketsInput>
+    connectOrCreate?: COUNTERCreateOrConnectWithoutTicketsInput
+    upsert?: COUNTERUpsertWithoutTicketsInput
+    disconnect?: COUNTERWhereInput | boolean
+    delete?: COUNTERWhereInput | boolean
+    connect?: COUNTERWhereUniqueInput
+    update?: XOR<XOR<COUNTERUpdateToOneWithWhereWithoutTicketsInput, COUNTERUpdateWithoutTicketsInput>, COUNTERUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6537,6 +6772,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -6565,7 +6811,7 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
     notIn?: number[] | null
@@ -6573,7 +6819,23 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type COUNTER_SERVICECreateWithoutCounterInput = {
@@ -6591,6 +6853,32 @@ export namespace Prisma {
 
   export type COUNTER_SERVICECreateManyCounterInputEnvelope = {
     data: COUNTER_SERVICECreateManyCounterInput | COUNTER_SERVICECreateManyCounterInput[]
+  }
+
+  export type TICKETCreateWithoutCounterInput = {
+    TicketNumber: string
+    StartTime: Date | string
+    EndTime?: Date | string | null
+    Date: Date | string
+    service: SERVICECreateNestedOneWithoutTicketsInput
+  }
+
+  export type TICKETUncheckedCreateWithoutCounterInput = {
+    TicketID?: number
+    TicketNumber: string
+    StartTime: Date | string
+    EndTime?: Date | string | null
+    Date: Date | string
+    ServiceID: number
+  }
+
+  export type TICKETCreateOrConnectWithoutCounterInput = {
+    where: TICKETWhereUniqueInput
+    create: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput>
+  }
+
+  export type TICKETCreateManyCounterInputEnvelope = {
+    data: TICKETCreateManyCounterInput | TICKETCreateManyCounterInput[]
   }
 
   export type COUNTER_SERVICEUpsertWithWhereUniqueWithoutCounterInput = {
@@ -6617,6 +6905,35 @@ export namespace Prisma {
     ServiceID?: IntFilter<"COUNTER_SERVICE"> | number
   }
 
+  export type TICKETUpsertWithWhereUniqueWithoutCounterInput = {
+    where: TICKETWhereUniqueInput
+    update: XOR<TICKETUpdateWithoutCounterInput, TICKETUncheckedUpdateWithoutCounterInput>
+    create: XOR<TICKETCreateWithoutCounterInput, TICKETUncheckedCreateWithoutCounterInput>
+  }
+
+  export type TICKETUpdateWithWhereUniqueWithoutCounterInput = {
+    where: TICKETWhereUniqueInput
+    data: XOR<TICKETUpdateWithoutCounterInput, TICKETUncheckedUpdateWithoutCounterInput>
+  }
+
+  export type TICKETUpdateManyWithWhereWithoutCounterInput = {
+    where: TICKETScalarWhereInput
+    data: XOR<TICKETUpdateManyMutationInput, TICKETUncheckedUpdateManyWithoutCounterInput>
+  }
+
+  export type TICKETScalarWhereInput = {
+    AND?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
+    OR?: TICKETScalarWhereInput[]
+    NOT?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
+    TicketID?: IntFilter<"TICKET"> | number
+    TicketNumber?: StringFilter<"TICKET"> | string
+    StartTime?: DateTimeFilter<"TICKET"> | Date | string
+    EndTime?: DateTimeNullableFilter<"TICKET"> | Date | string | null
+    Date?: DateTimeFilter<"TICKET"> | Date | string
+    ServiceID?: IntFilter<"TICKET"> | number
+    CounterID?: IntNullableFilter<"TICKET"> | number | null
+  }
+
   export type COUNTER_SERVICECreateWithoutServiceInput = {
     counter: COUNTERCreateNestedOneWithoutCounterServicesInput
   }
@@ -6635,16 +6952,20 @@ export namespace Prisma {
   }
 
   export type TICKETCreateWithoutServiceInput = {
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
+    counter?: COUNTERCreateNestedOneWithoutTicketsInput
   }
 
   export type TICKETUncheckedCreateWithoutServiceInput = {
     TicketID?: number
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
+    CounterID?: number | null
   }
 
   export type TICKETCreateOrConnectWithoutServiceInput = {
@@ -6688,24 +7009,15 @@ export namespace Prisma {
     data: XOR<TICKETUpdateManyMutationInput, TICKETUncheckedUpdateManyWithoutServiceInput>
   }
 
-  export type TICKETScalarWhereInput = {
-    AND?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
-    OR?: TICKETScalarWhereInput[]
-    NOT?: TICKETScalarWhereInput | TICKETScalarWhereInput[]
-    TicketID?: IntFilter<"TICKET"> | number
-    StartTime?: DateTimeFilter<"TICKET"> | Date | string
-    EndTime?: DateTimeNullableFilter<"TICKET"> | Date | string | null
-    Date?: DateTimeFilter<"TICKET"> | Date | string
-    ServiceID?: IntFilter<"TICKET"> | number
-  }
-
   export type COUNTERCreateWithoutCounterServicesInput = {
     CounterNumber: number
+    tickets?: TICKETCreateNestedManyWithoutCounterInput
   }
 
   export type COUNTERUncheckedCreateWithoutCounterServicesInput = {
     CounterID?: number
     CounterNumber: number
+    tickets?: TICKETUncheckedCreateNestedManyWithoutCounterInput
   }
 
   export type COUNTERCreateOrConnectWithoutCounterServicesInput = {
@@ -6744,11 +7056,13 @@ export namespace Prisma {
 
   export type COUNTERUpdateWithoutCounterServicesInput = {
     CounterNumber?: IntFieldUpdateOperationsInput | number
+    tickets?: TICKETUpdateManyWithoutCounterNestedInput
   }
 
   export type COUNTERUncheckedUpdateWithoutCounterServicesInput = {
     CounterID?: IntFieldUpdateOperationsInput | number
     CounterNumber?: IntFieldUpdateOperationsInput | number
+    tickets?: TICKETUncheckedUpdateManyWithoutCounterNestedInput
   }
 
   export type SERVICEUpsertWithoutCounterServicesInput = {
@@ -6793,6 +7107,22 @@ export namespace Prisma {
     create: XOR<SERVICECreateWithoutTicketsInput, SERVICEUncheckedCreateWithoutTicketsInput>
   }
 
+  export type COUNTERCreateWithoutTicketsInput = {
+    CounterNumber: number
+    counterServices?: COUNTER_SERVICECreateNestedManyWithoutCounterInput
+  }
+
+  export type COUNTERUncheckedCreateWithoutTicketsInput = {
+    CounterID?: number
+    CounterNumber: number
+    counterServices?: COUNTER_SERVICEUncheckedCreateNestedManyWithoutCounterInput
+  }
+
+  export type COUNTERCreateOrConnectWithoutTicketsInput = {
+    where: COUNTERWhereUniqueInput
+    create: XOR<COUNTERCreateWithoutTicketsInput, COUNTERUncheckedCreateWithoutTicketsInput>
+  }
+
   export type SERVICEUpsertWithoutTicketsInput = {
     update: XOR<SERVICEUpdateWithoutTicketsInput, SERVICEUncheckedUpdateWithoutTicketsInput>
     create: XOR<SERVICECreateWithoutTicketsInput, SERVICEUncheckedCreateWithoutTicketsInput>
@@ -6817,7 +7147,38 @@ export namespace Prisma {
     counterServices?: COUNTER_SERVICEUncheckedUpdateManyWithoutServiceNestedInput
   }
 
+  export type COUNTERUpsertWithoutTicketsInput = {
+    update: XOR<COUNTERUpdateWithoutTicketsInput, COUNTERUncheckedUpdateWithoutTicketsInput>
+    create: XOR<COUNTERCreateWithoutTicketsInput, COUNTERUncheckedCreateWithoutTicketsInput>
+    where?: COUNTERWhereInput
+  }
+
+  export type COUNTERUpdateToOneWithWhereWithoutTicketsInput = {
+    where?: COUNTERWhereInput
+    data: XOR<COUNTERUpdateWithoutTicketsInput, COUNTERUncheckedUpdateWithoutTicketsInput>
+  }
+
+  export type COUNTERUpdateWithoutTicketsInput = {
+    CounterNumber?: IntFieldUpdateOperationsInput | number
+    counterServices?: COUNTER_SERVICEUpdateManyWithoutCounterNestedInput
+  }
+
+  export type COUNTERUncheckedUpdateWithoutTicketsInput = {
+    CounterID?: IntFieldUpdateOperationsInput | number
+    CounterNumber?: IntFieldUpdateOperationsInput | number
+    counterServices?: COUNTER_SERVICEUncheckedUpdateManyWithoutCounterNestedInput
+  }
+
   export type COUNTER_SERVICECreateManyCounterInput = {
+    ServiceID: number
+  }
+
+  export type TICKETCreateManyCounterInput = {
+    TicketID?: number
+    TicketNumber: string
+    StartTime: Date | string
+    EndTime?: Date | string | null
+    Date: Date | string
     ServiceID: number
   }
 
@@ -6833,15 +7194,43 @@ export namespace Prisma {
     ServiceID?: IntFieldUpdateOperationsInput | number
   }
 
+  export type TICKETUpdateWithoutCounterInput = {
+    TicketNumber?: StringFieldUpdateOperationsInput | string
+    StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    service?: SERVICEUpdateOneRequiredWithoutTicketsNestedInput
+  }
+
+  export type TICKETUncheckedUpdateWithoutCounterInput = {
+    TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
+    StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ServiceID?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TICKETUncheckedUpdateManyWithoutCounterInput = {
+    TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
+    StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    ServiceID?: IntFieldUpdateOperationsInput | number
+  }
+
   export type COUNTER_SERVICECreateManyServiceInput = {
     CounterID: number
   }
 
   export type TICKETCreateManyServiceInput = {
     TicketID?: number
+    TicketNumber: string
     StartTime: Date | string
     EndTime?: Date | string | null
     Date: Date | string
+    CounterID?: number | null
   }
 
   export type COUNTER_SERVICEUpdateWithoutServiceInput = {
@@ -6857,23 +7246,29 @@ export namespace Prisma {
   }
 
   export type TICKETUpdateWithoutServiceInput = {
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    counter?: COUNTERUpdateOneWithoutTicketsNestedInput
   }
 
   export type TICKETUncheckedUpdateWithoutServiceInput = {
     TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    CounterID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TICKETUncheckedUpdateManyWithoutServiceInput = {
     TicketID?: IntFieldUpdateOperationsInput | number
+    TicketNumber?: StringFieldUpdateOperationsInput | string
     StartTime?: DateTimeFieldUpdateOperationsInput | Date | string
     EndTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Date?: DateTimeFieldUpdateOperationsInput | Date | string
+    CounterID?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

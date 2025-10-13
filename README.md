@@ -46,3 +46,5 @@ SERVICES (==ServiceID==, AvgServiceTime, Name)
 TICKETS (==TicketID==, ==Service==, CounterID, StartTime, EndTime)
 
 PROCESSED-REQUESTS (==TicketID==, ServiceID, CounterID, Date) //this table is tecnically for the statistics story, but since we are doing de DB we might as well create it, up for debate if we really want to do it or not
+
+![ER model](images/ERmodel.png)

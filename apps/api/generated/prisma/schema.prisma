@@ -20,6 +20,9 @@ model COUNTER {
 
   // relazione inversa verso COUNTER_SERVICE
   counterServices COUNTER_SERVICE[]
+
+  // relazione inversa verso TICKET
+  tickets TICKET[]
 }
 
 model SERVICE {
@@ -45,10 +48,13 @@ model COUNTER_SERVICE {
 }
 
 model TICKET {
-  TicketID  Int       @id @default(autoincrement())
-  StartTime DateTime
-  EndTime   DateTime?
-  Date      DateTime
-  ServiceID Int
-  service   SERVICE   @relation(fields: [ServiceID], references: [ServiceID])
+  TicketID     Int       @id @default(autoincrement())
+  TicketNumber String    @unique
+  StartTime    DateTime
+  EndTime      DateTime?
+  Date         DateTime
+  ServiceID    Int
+  service      SERVICE   @relation(fields: [ServiceID], references: [ServiceID])
+  CounterID    Int?
+  counter      COUNTER?  @relation(fields: [CounterID], references: [CounterID])
 }
