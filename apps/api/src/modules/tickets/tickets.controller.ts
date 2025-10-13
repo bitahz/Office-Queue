@@ -11,7 +11,7 @@ import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { InsertTicketDto } from './dto/insert-ticket.dto';
 
-@Controller('ticket')
+@Controller('tickets')
 export class TicketsController {
   constructor(private readonly ticketsService: TicketsService) {}
 
