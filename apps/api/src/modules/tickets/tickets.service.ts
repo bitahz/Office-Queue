@@ -21,7 +21,6 @@ export class TicketsService {
 
     const ticket = await this.prisma.tICKET.create({
       data: {
-        TicketNumber: createTicketDto.id,
         StartTime: new Date(),
         Date: new Date(),
         ServiceID: serviceId,
