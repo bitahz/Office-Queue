@@ -1,24 +1,34 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTicketDto } from './dto/create-ticket.dto';
-import { InsertTicketDto } from './dto/insert-ticket.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from 'src/providers/prisma/prisma.service';
 
 @Injectable()
 export class TicketService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async create(createTicketDto: CreateTicketDto) {
+    const serviceId = createTicketDto.serviceId;
 
-  async create(serviceId, createTicketDto: CreateTicketDto) {
-    let x = await this.prisma.sERVICE.findFirst({
+    const service = await this.prisma.sERVICE.findFirst({
       where: {
         ServiceID: serviceId,
       },
     });
-    if (!x) {
-      throw new Error('Service not found');
-    } else {
-    return createTicketDto.id;
+
+    if (!service) {
+      throw new NotFoundException(`Service with ID ${serviceId} not found`);
     }
+
+    const ticket = await this.prisma.tICKET.create({
+      data: {
+        TicketNumber: createTicketDto.id,
+        StartTime: new Date(),
+        Date: new Date(),
+        ServiceID: serviceId,
+      },
+    });
+
+    return ticket;
   }
 
   findAll() {
@@ -27,17 +37,6 @@ export class TicketService {
 
   findOne(id: number) {
     return `This action returns a #${id} ticket`;
-  }
-
-  async insert(createTicketDto: CreateTicketDto) {
-    await this.prisma.tICKET.create({
-      data: {
-        TicketNumber: createTicketDto.id,
-        StartTime: new Date(),
-        Date: new Date(),
-        ServiceID: createTicketDto.serviceId,
-      },
-    });
   }
 
   remove(id: number) {
