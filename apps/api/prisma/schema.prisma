@@ -47,9 +47,14 @@ model COUNTER_SERVICE {
   @@id([CounterID, ServiceID])
 }
 
+enum TicketStatus {
+  WAITING
+  SERVING
+  SERVED
+}
+
 model TICKET {
-  TicketID     Int      @id @default(autoincrement())
-  TicketNumber String   @unique
+  TicketID     Int      @id @default(autoincrement())  
   StartTime    DateTime
   EndTime      DateTime?
   Date         DateTime
@@ -57,4 +62,5 @@ model TICKET {
   service      SERVICE  @relation(fields: [ServiceID], references: [ServiceID])
   CounterID    Int?
   counter      COUNTER? @relation(fields: [CounterID], references: [CounterID])
+  status       TicketStatus @default(WAITING)
 }
