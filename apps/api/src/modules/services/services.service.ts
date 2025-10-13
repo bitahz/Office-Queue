@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../providers/prisma/prisma.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 
@@ -111,7 +111,7 @@ export class ServicesService {
   async getQueueLength(serviceId: number) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     return await this.prisma.tICKET.count({
       where: {
         ServiceID: serviceId,
