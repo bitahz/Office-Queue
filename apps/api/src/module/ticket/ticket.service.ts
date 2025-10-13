@@ -32,7 +32,7 @@ export class TicketService {
   async insert(createTicketDto: CreateTicketDto) {
     await this.prisma.tICKET.create({
       data: {
-        TicketID: createTicketDto.id,
+        TicketNumber: createTicketDto.id,
         StartTime: new Date(),
         Date: new Date(),
         ServiceID: createTicketDto.serviceId,
