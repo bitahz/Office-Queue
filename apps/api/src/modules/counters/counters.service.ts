@@ -8,8 +8,6 @@ export class CountersService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createCounterDto: CreateCounterDto) {
-    console.log(createCounterDto);
-
     return this.prisma.counter.create({
       data: {
         number: createCounterDto.number,
