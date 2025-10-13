@@ -7,16 +7,16 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { TicketService } from './ticket.service';
+import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { InsertTicketDto } from './dto/insert-ticket.dto';
 
 @Controller('ticket')
-export class TicketController {
-  constructor(private readonly ticketService: TicketService) {}
+export class TicketsController {
+  constructor(private readonly ticketsService: TicketsService) {}
 
   @Post()
   create(@Body() createTicketDto: CreateTicketDto) {
-    return this.ticketService.create(createTicketDto);
+    return this.ticketsService.create(createTicketDto);
   }
 }

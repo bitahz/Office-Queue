@@ -3,7 +3,7 @@ import { CreateTicketDto } from './dto/create-ticket.dto';
 import { PrismaService } from 'src/providers/prisma/prisma.service';
 
 @Injectable()
-export class TicketService {
+export class TicketsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createTicketDto: CreateTicketDto) {
