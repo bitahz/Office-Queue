@@ -158,3 +158,6 @@ apps/api/generated/prisma
 
 # SQLite database files
 *.sqlite
+
+# Exclue .env inside apps/api
+!apps/api/.env*
