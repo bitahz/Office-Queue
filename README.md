@@ -5,6 +5,7 @@
 # Routes
 - POST /ticket
 - GET /service/list
+- GET /:id/next_ticket
 
 ### Backend
 # Dao
@@ -34,7 +35,13 @@
                         },
                         ...
                         ]
-    - Response: 200 (ok), 500 (generic error) 
+    - Response: 200 (ok), 500 (generic error)
+
+- /:id/next_ticket
+      - Method: GET
+      - Request body: none
+      - Reponse body: { ticketID: string }
+      - Response: 200 (ok), 500 (generic error)    
 
 ### DB Description
 COUNTER-SERVICES (==CounterID==, ==ServiceID==)
