@@ -46,12 +46,13 @@
 ### DB Description
 COUNTER-SERVICES (==CounterID==, ==ServiceID==)
 
-COUNTERS (==CounterID==)
+COUNTERS (==CounterID==, Number)
 
 SERVICES (==ServiceID==, AvgServiceTime, Name)
 
-TICKETS (==TicketID==, ==Service==, CounterID, StartTime, EndTime)
+TICKETS (==TicketID==, ServiceID, CounterID, StartTime, EndTime, Status)
 
 PROCESSED-REQUESTS (==TicketID==, ServiceID, CounterID, Date) //this table is tecnically for the statistics story, but since we are doing de DB we might as well create it, up for debate if we really want to do it or not
 
-![ER model](images/ERmodel.png)
+![E-R diagram](images/ER.png)
+
