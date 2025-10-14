@@ -11,6 +11,9 @@ import { CountersService } from './counters.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
 
+//id are counter_id, please change the name when you have time to avoid confusion
+//since we have so many ids
+
 @Controller('counters')
 export class CountersController {
   constructor(private readonly countersService: CountersService) {}
