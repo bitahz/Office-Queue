@@ -3,7 +3,7 @@ import { ServicesService } from './services.service';
 import { PrismaService } from '../../providers/prisma/prisma.service';
 
 const mockPrismaService = {
-  sERVICE: {
+  service: {
     create: jest.fn(),
     findMany: jest.fn(),
     findUnique: jest.fn(),
@@ -11,7 +11,7 @@ const mockPrismaService = {
     update: jest.fn(),
     delete: jest.fn(),
   },
-  tICKET: {
+  ticket: {
     count: jest.fn(),
   },
 };
@@ -51,19 +51,19 @@ describe('ServicesService', () => {
       };
 
       const expectedResult = {
-        ServiceID: 1,
-        Name: 'Test Service',
-        AvgServiceTime: 10,
+        id: 1,
+        name: 'Test Service',
+        avgServiceTime: 10,
       };
 
-      mockPrismaService.sERVICE.create.mockResolvedValue(expectedResult);
+      mockPrismaService.service.create.mockResolvedValue(expectedResult);
 
       const result = await service.create(createServiceDto);
 
-      expect(prisma.sERVICE.create).toHaveBeenCalledWith({
+      expect(prisma.service.create).toHaveBeenCalledWith({
         data: {
-          Name: createServiceDto.name,
-          AvgServiceTime: createServiceDto.avgServiceTime,
+          name: createServiceDto.name,
+          avgServiceTime: createServiceDto.avgServiceTime,
         },
       });
       expect(result).toEqual(expectedResult);
@@ -74,18 +74,18 @@ describe('ServicesService', () => {
     it('should return an array of services', async () => {
       const expectedResult = [
         {
-          ServiceID: 1,
-          Name: 'Test Service 1',
-          AvgServiceTime: 10,
+          id: 1,
+          name: 'Test Service 1',
+          avgServiceTime: 10,
         },
       ];
 
-      mockPrismaService.sERVICE.findMany.mockResolvedValue(expectedResult);
+      mockPrismaService.service.findMany.mockResolvedValue(expectedResult);
 
       const result = await service.findAll();
 
-      expect(prisma.sERVICE.findMany).toHaveBeenCalledWith({
-        orderBy: { Name: 'asc' },
+      expect(prisma.service.findMany).toHaveBeenCalledWith({
+        orderBy: { name: 'asc' },
         include: {
           counterServices: {
             include: {
@@ -105,17 +105,17 @@ describe('ServicesService', () => {
     it('should return a service by id', async () => {
       const serviceId = 1;
       const expectedResult = {
-        ServiceID: 1,
-        Name: 'Test Service',
-        AvgServiceTime: 10,
+        id: 1,
+        name: 'Test Service',
+        avgServiceTime: 10,
       };
 
-      mockPrismaService.sERVICE.findUnique.mockResolvedValue(expectedResult);
+      mockPrismaService.service.findUnique.mockResolvedValue(expectedResult);
 
       const result = await service.findOne(serviceId);
 
-      expect(prisma.sERVICE.findUnique).toHaveBeenCalledWith({
-        where: { ServiceID: serviceId },
+      expect(prisma.service.findUnique).toHaveBeenCalledWith({
+        where: { id: serviceId },
         include: {
           counterServices: {
             include: {
@@ -131,10 +131,10 @@ describe('ServicesService', () => {
     it('should throw NotFoundException when service not found', async () => {
       const serviceId = 999;
 
-      mockPrismaService.sERVICE.findUnique.mockResolvedValue(null);
+      mockPrismaService.service.findUnique.mockResolvedValue(null);
 
       await expect(service.findOne(serviceId)).rejects.toThrow(
-        'Service with ID 999 not found',
+        `Service with ID ${serviceId} not found`,
       );
     });
   });
