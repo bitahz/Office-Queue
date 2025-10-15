@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ServicesController } from './services.controller';
 import { ServicesService } from './services.service';
+import { ServicesModule } from './services.module';
+import { PrismaService } from '../../providers/prisma/prisma.service';
 
 describe('ServicesController', () => {
   let controller: ServicesController;
@@ -77,5 +79,26 @@ describe('ServicesController', () => {
   it('should remove a service', () => {
     expect(controller.remove(1)).toBe('removed');
     expect(service.remove).toHaveBeenCalledWith(1);
+  });
+});
+
+describe('ServicesModule', () => {
+  let module: TestingModule;
+
+  beforeEach(async () => {
+    module = await Test.createTestingModule({
+      imports: [ServicesModule],
+    })
+      .overrideProvider(PrismaService)
+      .useValue({}) // mock di PrismaService
+      .compile();
+  });
+
+  it('should compile the module and resolve controller and service', () => {
+    const controller = module.get<ServicesController>(ServicesController);
+    const service = module.get<ServicesService>(ServicesService);
+
+    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });
