@@ -7,38 +7,44 @@ import { PrismaService } from '../../providers/prisma/prisma.service';
 export class TicketsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  private async generateRandomTicketNumber(): Promise<string> {
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
+  private async generateRandomTicketNumber(serviceId: number): Promise<string> {
+    // Recupera il service per ottenere la prima lettera
+    const service = await this.prisma.service.findUnique({
+      where: { id: serviceId },
+    });
 
-    let ticketNumber: string = '';
-    let exists = true;
-
-    // Genera finché non trova un codice unico
-    while (exists) {
-      let code = '';
-
-      // 3 lettere random
-      for (let i = 0; i < 3; i++) {
-        code += letters.charAt(Math.floor(Math.random() * letters.length));
-      }
-
-      // 3 numeri random
-      for (let i = 0; i < 3; i++) {
-        code += numbers.charAt(Math.floor(Math.random() * numbers.length));
-      }
-
-      ticketNumber = code;
-
-      // Verifica se esiste già
-      const existing = await this.prisma.ticket.findFirst({
-        where: { ticketNumber: ticketNumber },
-      });
-
-      exists = !!existing;
+    if (!service || !service.tag) {
+      throw new NotFoundException(`Service with ID ${serviceId} not found`);
     }
 
-    return ticketNumber;
+    const firstLetter = service.tag.charAt(0).toUpperCase();
+
+    // Trova l'ultimo ticket per questo servizio
+    const lastTicket = await this.prisma.ticket.findFirst({
+      where: {
+        ticketNumber: {
+          startsWith: firstLetter,
+        },
+      },
+      orderBy: {
+        ticketNumber: 'desc',
+      },
+    });
+
+    let nextNumber = 1;
+
+    if (lastTicket) {
+      // Estrae il numero dal ticketNumber (es. "A123" -> 123)
+      const lastNumber = parseInt(lastTicket.ticketNumber.substring(1));
+      if (!isNaN(lastNumber)) {
+        nextNumber = lastNumber + 1;
+      }
+    }
+
+    // Formatta il numero con 4 cifre (padding con zeri)
+    const paddedNumber = nextNumber.toString().padStart(4, '0');
+
+    return `${firstLetter}${paddedNumber}`;
   }
 
   async create(createTicketDto: CreateTicketDto) {
@@ -54,7 +60,7 @@ export class TicketsService {
       throw new NotFoundException(`Service with ID ${serviceId} not found`);
     }
 
-    const ticketNumber = await this.generateRandomTicketNumber();
+    const ticketNumber = await this.generateRandomTicketNumber(serviceId);
 
     const ticket = await this.prisma.ticket.create({
       data: {
