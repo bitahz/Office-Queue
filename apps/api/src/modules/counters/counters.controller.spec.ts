@@ -89,4 +89,6 @@ describe('CountersController', () => {
       expect(mockCountersService.assignService).toHaveBeenCalledWith(2, 8);
     });
   });
+
 });
+
