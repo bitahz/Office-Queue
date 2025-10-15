@@ -90,7 +90,7 @@ describe('ServicesModule', () => {
       imports: [ServicesModule],
     })
       .overrideProvider(PrismaService)
-      .useValue({}) // mock di PrismaService
+      .useValue({}) 
       .compile();
   });
 

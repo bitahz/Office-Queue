@@ -53,7 +53,7 @@ describe('TicketsModule', () => {
       imports: [TicketsModule],
     })
       .overrideProvider(PrismaService)
-      .useValue({}) // mock PrismaService
+      .useValue({}) 
       .compile();
   });
 

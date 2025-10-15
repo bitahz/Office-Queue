@@ -91,10 +91,9 @@ describe('TicketsService', () => {
 
       prismaMock.service.findFirst.mockResolvedValue(mockService);
 
-      // Simula un ticket duplicato la prima volta, poi un codice unico
       prismaMock.ticket.findFirst
-        .mockResolvedValueOnce({ ticketNumber: 'DUP123' }) // duplicato
-        .mockResolvedValueOnce(null); // valido
+        .mockResolvedValueOnce({ ticketNumber: 'DUP123' }) 
+        .mockResolvedValueOnce(null); 
 
       prismaMock.ticket.create.mockResolvedValue(mockTicket);
 

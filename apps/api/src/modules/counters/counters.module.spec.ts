@@ -85,7 +85,7 @@ describe('CountersModule', () => {
       imports: [CountersModule],
     })
       .overrideProvider(PrismaService)
-      .useValue({}) // Mock del servizio Prisma
+      .useValue({}) 
       .compile();
   });
 
