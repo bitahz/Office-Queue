@@ -1,8 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TicketsService } from './tickets.service';
 import { PrismaService } from '../../providers/prisma/prisma.service';
-
+import { TicketsService } from './tickets.service';
 
 const prismaMock = {
   service: {
@@ -39,7 +38,7 @@ describe('TicketsService', () => {
   describe('create', () => {
     it('should create a ticket if service exists', async () => {
       const createTicketDto = { serviceId: 1 };
-      const mockService = { id: 1, name: 'Service1' };
+      const mockService = { id: 1, tag: 'Service1' };
       const mockTicket = { id: 10, startTime: new Date(), serviceId: 1 };
 
       prismaMock.service.findFirst.mockResolvedValue(mockService);
@@ -74,5 +73,4 @@ describe('TicketsService', () => {
       expect(prismaMock.ticket.create).not.toHaveBeenCalled();
     });
   });
-
 });

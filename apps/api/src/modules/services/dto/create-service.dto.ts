@@ -1,9 +1,13 @@
-import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  tag: string;
+
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
   @IsNumber()
   @IsPositive()

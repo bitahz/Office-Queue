@@ -16,7 +16,7 @@ describe('ServicesController', () => {
             create: jest.fn().mockReturnValue('created'),
             findAll: jest.fn().mockReturnValue(['service1', 'service2']),
             findOne: jest.fn().mockReturnValue('service1'),
-            findByName: jest.fn().mockReturnValue('serviceByName'),
+            findByTag: jest.fn().mockReturnValue('serviceByTag'),
             update: jest.fn().mockReturnValue('updated'),
             remove: jest.fn().mockReturnValue('removed'),
             getQueueLength: jest.fn().mockReturnValue(3),
@@ -30,18 +30,27 @@ describe('ServicesController', () => {
     service = module.get<ServicesService>(ServicesService);
   });
 
-    afterEach(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
-
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
   it('should create a service', () => {
-    expect(controller.create({ name: 'Test', avgServiceTime: 10 })).toBe('created');
-    expect(service.create).toHaveBeenCalledWith({ name: 'Test', avgServiceTime: 10 });
+    expect(
+      controller.create({
+        tag: 'test',
+        description: 'Test',
+        avgServiceTime: 10,
+      }),
+    ).toBe('created');
+    expect(service.create).toHaveBeenCalledWith({
+      tag: 'test',
+      description: 'Test',
+      avgServiceTime: 10,
+    });
   });
 
   it('should return all services', () => {
@@ -54,9 +63,9 @@ describe('ServicesController', () => {
     expect(service.findOne).toHaveBeenCalledWith(1);
   });
 
-  it('should return a service by name', () => {
-    expect(controller.findByName('Test')).toBe('serviceByName');
-    expect(service.findByName).toHaveBeenCalledWith('Test');
+  it('should return a service by tag', () => {
+    expect(controller.findByTag('Test')).toBe('serviceByTag');
+    expect(service.findByTag).toHaveBeenCalledWith('Test');
   });
 
   it('should return queue length', () => {
@@ -70,8 +79,13 @@ describe('ServicesController', () => {
   });
 
   it('should update a service', () => {
-    expect(controller.update(1, { name: 'Updated', avgServiceTime: 15 })).toBe('updated');
-    expect(service.update).toHaveBeenCalledWith(1, { name: 'Updated', avgServiceTime: 15 });
+    expect(controller.update(1, { tag: 'Updated', avgServiceTime: 15 })).toBe(
+      'updated',
+    );
+    expect(service.update).toHaveBeenCalledWith(1, {
+      tag: 'Updated',
+      avgServiceTime: 15,
+    });
   });
 
   it('should remove a service', () => {

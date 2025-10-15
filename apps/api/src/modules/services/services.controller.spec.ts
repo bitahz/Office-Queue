@@ -6,7 +6,7 @@ const mockServicesService = {
   create: jest.fn(),
   findAll: jest.fn(),
   findOne: jest.fn(),
-  findByName: jest.fn(),
+  findByTag: jest.fn(),
   getQueueLength: jest.fn(),
   getServicesForCounter: jest.fn(),
   update: jest.fn(),
@@ -43,13 +43,15 @@ describe('ServicesController', () => {
   describe('create', () => {
     it('should create a service', async () => {
       const createServiceDto = {
-        name: 'Test Service',
+        tag: 'test',
+        description: 'Test Service',
         avgServiceTime: 10,
       };
 
       const expectedResult = {
         ServiceID: 1,
-        Name: 'Test Service',
+        Tag: 'test',
+        Description: 'Test Service',
         AvgServiceTime: 10,
       };
 
@@ -99,20 +101,21 @@ describe('ServicesController', () => {
     });
   });
 
-  describe('findByName', () => {
-    it('should return a service by name', async () => {
-      const serviceName = 'Test Service';
+  describe('findByTag', () => {
+    it('should return a service by tag', async () => {
+      const serviceTag = 'test';
       const expectedResult = {
         ServiceID: 1,
-        Name: 'Test Service',
+        Tag: 'test',
+        Description: 'Test Service',
         AvgServiceTime: 10,
       };
 
-      mockServicesService.findByName.mockResolvedValue(expectedResult);
+      mockServicesService.findByTag.mockResolvedValue(expectedResult);
 
-      const result = await controller.findByName(serviceName);
+      const result = await controller.findByTag(serviceTag);
 
-      expect(service.findByName).toHaveBeenCalledWith(serviceName);
+      expect(service.findByTag).toHaveBeenCalledWith(serviceTag);
       expect(result).toEqual(expectedResult);
     });
   });

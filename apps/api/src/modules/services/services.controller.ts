@@ -1,16 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
   ParseIntPipe,
+  Patch,
+  Post,
 } from '@nestjs/common';
-import { ServicesService } from './services.service';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
+import { ServicesService } from './services.service';
 
 @Controller('services')
 export class ServicesController {
@@ -32,8 +32,8 @@ export class ServicesController {
   }
 
   @Get('name/:name')
-  findByName(@Param('name') name: string) {
-    return this.servicesService.findByName(name);
+  findByTag(@Param('name') name: string) {
+    return this.servicesService.findByTag(name);
   }
 
   @Get(':id/queue-length')

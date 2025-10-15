@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ServicesService } from './services.service';
 import { PrismaService } from '../../providers/prisma/prisma.service';
+import { ServicesService } from './services.service';
 
 const mockPrismaService = {
   service: {
@@ -46,13 +46,15 @@ describe('ServicesService', () => {
   describe('create', () => {
     it('should create a service', async () => {
       const createServiceDto = {
-        name: 'Test Service',
+        tag: 'test',
+        description: 'Test Service',
         avgServiceTime: 10,
       };
 
       const expectedResult = {
         id: 1,
-        name: 'Test Service',
+        tag: 'test',
+        description: 'Test Service',
         avgServiceTime: 10,
       };
 
@@ -62,7 +64,8 @@ describe('ServicesService', () => {
 
       expect(prisma.service.create).toHaveBeenCalledWith({
         data: {
-          name: createServiceDto.name,
+          tag: createServiceDto.tag,
+          description: createServiceDto.description,
           avgServiceTime: createServiceDto.avgServiceTime,
         },
       });
@@ -75,7 +78,8 @@ describe('ServicesService', () => {
       const expectedResult = [
         {
           id: 1,
-          name: 'Test Service 1',
+          tag: 'test1',
+          description: 'Test Service 1',
           avgServiceTime: 10,
         },
       ];
@@ -85,7 +89,7 @@ describe('ServicesService', () => {
       const result = await service.findAll();
 
       expect(prisma.service.findMany).toHaveBeenCalledWith({
-        orderBy: { name: 'asc' },
+        orderBy: { tag: 'asc' },
         include: {
           counterServices: {
             include: {
@@ -106,7 +110,8 @@ describe('ServicesService', () => {
       const serviceId = 1;
       const expectedResult = {
         id: 1,
-        name: 'Test Service',
+        tag: 'test',
+        description: 'Test Service',
         avgServiceTime: 10,
       };
 

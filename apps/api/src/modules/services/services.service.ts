@@ -10,7 +10,8 @@ export class ServicesService {
   async create(createServiceDto: CreateServiceDto) {
     return await this.prisma.service.create({
       data: {
-        name: createServiceDto.name,
+        tag: createServiceDto.tag,
+        description: createServiceDto.description,
         avgServiceTime: createServiceDto.avgServiceTime,
       },
     });
@@ -18,7 +19,7 @@ export class ServicesService {
 
   async findAll() {
     return await this.prisma.service.findMany({
-      orderBy: { name: 'asc' },
+      orderBy: { tag: 'asc' },
       include: {
         counterServices: {
           include: {
@@ -52,9 +53,9 @@ export class ServicesService {
     return service;
   }
 
-  async findByName(name: string) {
+  async findByTag(tag: string) {
     const service = await this.prisma.service.findFirst({
-      where: { name: name },
+      where: { tag: tag },
       include: {
         counterServices: {
           include: {
@@ -76,7 +77,7 @@ export class ServicesService {
       return await this.prisma.service.update({
         where: { id: id },
         data: {
-          name: updateServiceDto.name,
+          tag: updateServiceDto.tag,
           avgServiceTime: updateServiceDto.avgServiceTime,
         },
       });
