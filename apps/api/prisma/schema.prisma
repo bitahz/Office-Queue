@@ -27,7 +27,7 @@ model Counter {
 
 model Service {
   id                Int               @id @default(autoincrement())
-  name               String
+  tag               String
   description       String
   avgServiceTime    Int
 

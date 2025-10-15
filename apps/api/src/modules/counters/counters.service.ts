@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
 import { PrismaService } from '../../providers/prisma/prisma.service';
@@ -51,6 +51,10 @@ export class CountersService {
     const counterServicesIds = counterServices.map(
       (counterService) => counterService.serviceId,
     );
+
+    if (!counterServicesIds.length) {
+      throw new NotFoundException('No services assigned to this counter');
+    }
 
     const nextTicket = await this.prisma.ticket.findFirst({
       where: {
