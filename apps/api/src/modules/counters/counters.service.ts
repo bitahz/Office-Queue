@@ -55,6 +55,24 @@ export class CountersService {
     if (!counterServicesIds.length) {
       throw new NotFoundException('No services assigned to this counter');
     }
+    
+    const currentTicket = await this.prisma.ticket.findFirst({
+      where: {
+      counterId: id,
+      status: 'SERVING',
+      },
+    });
+
+    if (currentTicket) {
+      await this.prisma.ticket.update({
+        where: { id: currentTicket.id },
+        data: {
+          status: 'SERVED',
+          endTime: new Date(),
+        },
+      });
+    }
+    //console.log("CurrentTicket servito");
 
     const nextTicket = await this.prisma.ticket.findFirst({
       where: {
@@ -64,7 +82,23 @@ export class CountersService {
       orderBy: { startTime: 'asc' },
     });
 
-    return nextTicket;
+    if (!nextTicket) {
+      throw new NotFoundException('No waiting tickets for the services assigned to this counter');
+    }
+
+    // Aggiorna il ticket nel database
+    const updatedTicket = await this.prisma.ticket.update({
+      where: { id: nextTicket.id },
+      data: {
+        counterId: id,
+        status: 'SERVING',
+      },
+      include: {
+        service: true,
+      },
+    });
+
+    return updatedTicket;
   }
 
   assignService(counterId: number, serviceId: number) {
