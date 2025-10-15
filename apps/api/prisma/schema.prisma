@@ -27,7 +27,8 @@ model Counter {
 
 model Service {
   id                Int               @id @default(autoincrement())
-  name              String
+  name               String
+  description       String
   avgServiceTime    Int
 
   // relazione inversa verso COUNTER_SERVICE
