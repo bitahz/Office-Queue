@@ -4,9 +4,10 @@ import { RippleButton } from './ui/shadcn-io/ripple-button';
 type CustomRippleButtonProps = {
   children: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 };
 
-const CustomRippleButton: React.FC<CustomRippleButtonProps> = ({ children, onClick }) => {
+const CustomRippleButton: React.FC<CustomRippleButtonProps> = ({ children, onClick, disabled }) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -14,6 +15,7 @@ const CustomRippleButton: React.FC<CustomRippleButtonProps> = ({ children, onCli
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      disabled={disabled}
       style={{
         fontSize: '20px',
         padding: '15px',
