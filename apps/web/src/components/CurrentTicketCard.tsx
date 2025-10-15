@@ -1,15 +1,20 @@
 import type { Ticket } from "@/types/ticket";
-import { CheckCircle2, Ticket as TicketIcon } from "lucide-react";
+import { CheckCircle2, RefreshCw, Ticket as TicketIcon } from "lucide-react";
+import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type CurrentTicketCardProps = {
   ticket: Ticket | null;
   allTicketsServed?: boolean;
+  onRefresh?: () => void;
+  isRefreshing?: boolean;
 };
 
 export function CurrentTicketCard({
   ticket,
   allTicketsServed,
+  onRefresh,
+  isRefreshing,
 }: CurrentTicketCardProps) {
   if (allTicketsServed) {
     return (
@@ -27,6 +32,19 @@ export function CurrentTicketCard({
               Great job! There are no more tickets in the queue.
             </p>
           </div>
+          {onRefresh && (
+            <Button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              variant="outline"
+              className="gap-2"
+            >
+              <RefreshCw
+                className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
+              />
+              {isRefreshing ? "Checking..." : "Check for New Tickets"}
+            </Button>
+          )}
         </CardContent>
       </Card>
     );

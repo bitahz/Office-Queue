@@ -94,6 +94,21 @@ const OfficerPage = () => {
     }
   };
 
+  const handleRefresh = async () => {
+    if (!selectedCounter) return;
+
+    setLoading(true);
+    try {
+      const ticket = await fetchNextTicket(selectedCounter);
+      setcurrentTicket(ticket);
+      setAllTicketsServed(ticket === null);
+    } catch (error) {
+      // Error is already logged in the service
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const selectedCounterData = counters.find((c) => c.id === selectedCounter);
 
   return (
@@ -158,6 +173,8 @@ const OfficerPage = () => {
               <CurrentTicketCard
                 ticket={currentTicket}
                 allTicketsServed={allTicketsServed}
+                onRefresh={handleRefresh}
+                isRefreshing={loading}
               />
             )}
 
