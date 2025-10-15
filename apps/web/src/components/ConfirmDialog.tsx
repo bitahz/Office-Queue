@@ -1,12 +1,12 @@
 import type { Service } from "@/types/ticket";
 import { Button } from "./ui/button";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from "./ui/dialog";
 
 type ConfirmDialogProps = {
@@ -31,11 +31,11 @@ export function ConfirmDialog({
           <DialogTitle>Conferma Selezione</DialogTitle>
           <DialogDescription className="space-y-2 pt-4">
             <div>
-              Hai selezionato: <strong>{service.name}</strong>
+              Hai selezionato: <strong>{service.description}</strong>
             </div>
-            <div className="text-muted-foreground">{service.description}</div>
             <div className="pt-2">
-              Tempo medio attesa: <strong>{service.averageServiceTime}</strong>
+              Tempo medio attesa:{" "}
+              <strong>{service.avgServiceTime + " min"}</strong>
             </div>
           </DialogDescription>
         </DialogHeader>
