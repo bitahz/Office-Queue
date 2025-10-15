@@ -55,6 +55,7 @@ enum TicketStatus {
 
 model Ticket {
   id            Int      @id @default(autoincrement())  
+  ticketNumber  String   @unique
   startTime     DateTime
   endTime       DateTime?  
   serviceId     Int
