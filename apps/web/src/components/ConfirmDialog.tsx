@@ -28,13 +28,13 @@ export function ConfirmDialog({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Conferma Selezione</DialogTitle>
+          <DialogTitle>Confirm Selection</DialogTitle>
           <DialogDescription className="space-y-2 pt-4">
             <div>
-              Hai selezionato: <strong>{service.description}</strong>
+              You have selected: <strong>{service.description}</strong>
             </div>
             <div className="pt-2">
-              Tempo medio attesa:{" "}
+              Average Waiting Time:{" "}
               <strong>{service.avgServiceTime + " min"}</strong>
             </div>
           </DialogDescription>
@@ -43,7 +43,7 @@ export function ConfirmDialog({
           <Button variant="outline" onClick={onClose}>
             Annulla
           </Button>
-          <Button onClick={onConfirm}>Conferma</Button>
+          <Button onClick={onConfirm}>Confirm</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
