@@ -18,12 +18,26 @@ export class CountersService {
   findAll() {
     return this.prisma.counter.findMany({
       orderBy: { number: 'asc' },
+      include: {
+        counterServices: {
+          select: {
+            service: true,
+          },
+        },
+      },
     });
   }
 
   findOne(id: number) {
     return this.prisma.counter.findUnique({
       where: { id: id },
+      include: {
+        counterServices: {
+          select: {
+            service: true,
+          },
+        },
+      },
     });
   }
 
