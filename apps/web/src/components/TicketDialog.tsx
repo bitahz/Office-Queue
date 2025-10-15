@@ -24,7 +24,7 @@ export function TicketDialog({ open, ticket, onClose }: TicketDialogProps) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="text-center items-center space-y-4">
           <CheckCircle className="h-16 w-16 text-green-500" />
-          <DialogTitle className="text-2xl">Ticket Generato!</DialogTitle>
+          <DialogTitle className="text-2xl">Ticket Generated!</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col items-center space-y-6 py-6">
           <div className="flex items-center justify-center bg-primary text-primary-foreground rounded-lg p-6 gap-3">
@@ -36,12 +36,12 @@ export function TicketDialog({ open, ticket, onClose }: TicketDialogProps) {
           </h3>
           <div className="w-full space-y-2 bg-muted rounded-lg p-4">
             <div className="flex justify-between">
-              <span className="font-medium">Data e ora emissione:</span>
+              <span className="font-medium">Date and hour of issue:</span>
               <span>{ticket.date}</span>
             </div>
           </div>
           <DialogDescription className="text-center">
-            Conserva questo numero. Verrai chiamato quando sarà il tuo turno.
+            Save this number. They'll call you when it's your turn.
           </DialogDescription>
         </div>
         <DialogFooter className="sm:justify-center">
