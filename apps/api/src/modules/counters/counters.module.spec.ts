@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CountersController } from './counters.controller';
 import { CountersService } from './counters.service';
+import { CountersModule } from './counters.module';
+import { PrismaService } from '../../providers/prisma/prisma.service';
 
 describe('CountersController', () => {
   let controller: CountersController;
@@ -71,5 +73,27 @@ describe('CountersController', () => {
   it('should assign service to counter', () => {
     expect(controller.assignService('1', '2')).toBe('assigned');
     expect(service.assignService).toHaveBeenCalledWith(1, 2);
+  });
+});
+
+
+describe('CountersModule', () => {
+  let module: TestingModule;
+
+  beforeEach(async () => {
+    module = await Test.createTestingModule({
+      imports: [CountersModule],
+    })
+      .overrideProvider(PrismaService)
+      .useValue({}) // Mock del servizio Prisma
+      .compile();
+  });
+
+  it('should compile and resolve controller and service', () => {
+    const controller = module.get<CountersController>(CountersController);
+    const service = module.get<CountersService>(CountersService);
+
+    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });

@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TicketsController } from './tickets.controller';
 import { TicketsService } from './tickets.service';
 import { PrismaService } from '../../providers/prisma/prisma.service';
+import { TicketsModule } from './tickets.module';
 
 describe('TicketsModule', () => {
   let controller: TicketsController;
@@ -40,5 +41,27 @@ describe('TicketsModule', () => {
 
     expect(controller.create(createTicketDto)).toBe('ticket-created');
     expect(spy).toHaveBeenCalledWith(createTicketDto);
+  });
+});
+
+
+describe('TicketsModule', () => {
+  let module: TestingModule;
+
+  beforeEach(async () => {
+    module = await Test.createTestingModule({
+      imports: [TicketsModule],
+    })
+      .overrideProvider(PrismaService)
+      .useValue({}) // mock PrismaService
+      .compile();
+  });
+
+  it('should compile the module and resolve controller and service', () => {
+    const controller = module.get<TicketsController>(TicketsController);
+    const service = module.get<TicketsService>(TicketsService);
+
+    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });
