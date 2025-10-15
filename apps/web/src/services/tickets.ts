@@ -10,7 +10,6 @@ export async function fetchServices(): Promise<ServiceWithIcon[]> {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const services: Service[] = await response.json();
-    console.log("Fetched services:", services);
     return enrichServicesWithIcons(services);
   } catch (error) {
     console.error("Failed to fetch services:", error);

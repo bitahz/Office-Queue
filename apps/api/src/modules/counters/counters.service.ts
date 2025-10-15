@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../providers/prisma/prisma.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
-import { PrismaService } from '../../providers/prisma/prisma.service';
 
 @Injectable()
 export class CountersService {
@@ -69,11 +69,11 @@ export class CountersService {
     if (!counterServicesIds.length) {
       throw new NotFoundException('No services assigned to this counter');
     }
-    
+
     const currentTicket = await this.prisma.ticket.findFirst({
       where: {
-      counterId: id,
-      status: 'SERVING',
+        counterId: id,
+        status: 'SERVING',
       },
     });
 
@@ -86,7 +86,6 @@ export class CountersService {
         },
       });
     }
-    //console.log("CurrentTicket servito");
 
     const nextTicket = await this.prisma.ticket.findFirst({
       where: {
@@ -97,7 +96,9 @@ export class CountersService {
     });
 
     if (!nextTicket) {
-      throw new NotFoundException('No waiting tickets for the services assigned to this counter');
+      throw new NotFoundException(
+        'No waiting tickets for the services assigned to this counter',
+      );
     }
 
     // Aggiorna il ticket nel database

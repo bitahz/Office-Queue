@@ -27,7 +27,7 @@ export function ServiceCard({ service, onSelect }: ServiceCardProps) {
       </CardContent>
       <CardFooter className="pt-0">
         <Button className="w-full" onClick={() => onSelect(service)}>
-          Seleziona
+          Select
         </Button>
       </CardFooter>
     </Card>
