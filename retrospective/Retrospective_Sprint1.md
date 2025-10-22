@@ -23,8 +23,6 @@ Topics Index:
 
 We considered the story done according to the base Definition of Done
 
-> Please refine your DoD if required (you cannot remove items!)
-
 ### Detailed statistics
 
 | Story            | # Tasks | Points | Hours est. | Hours actual |
@@ -32,8 +30,7 @@ We considered the story done according to the base Definition of Done
 | _Uncategorized_  | 5       | /      | 23h 40m    | 25h          |
 | 1: Get Ticket    | 11      | 3      | 23h 20m    | 23h 45m      |
 | 2: Next Customer | 8       | 3      | 13h        | 10h 50m      |
-
-> story `Uncategorized` is for technical tasks, leave out story points (not applicable in this case)
+| **Total**       | **24**  | **6**  | **60h**    | **59h 35m**  |
 
 - Hours per task average, standard deviation (estimate and actual)
 
@@ -131,7 +128,6 @@ $$
   - think deeper about time estimation before assign tasks
   - assign/pick all tasks before starting work on the sprint
   - start with a more clear plan/path and documentation
-    > Propose one or two
 
 - One thing you are proud of as a Team!!
   As a team we are proud of how we worked together managing to create a positive, collaborative environment that led to a strong final product at the end of the sprint
